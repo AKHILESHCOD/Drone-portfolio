@@ -13,7 +13,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
         <nav className="fixed top-0 left-0 w-full flex justify-between items-center p-5 bg-black bg-opacity-30 text-tomato shadow-lg backdrop-blur-md z-20">
           <div className="flex items-center space-x-4 cursor-pointer" onClick={() => onNavigate('/')}>
             <Cpu className="h-10 w-10" />
-            <h1 className="text-2xl font-bold">SkyTrinethra</h1>
+            <h1 className="text-2xl font-bold">ＳＫＹＴＨＲＩＮΞＴＨＲΛ</h1>
           </div>
           <div className="flex space-x-6 mt-3">
             <button onClick={() => onNavigate('/')} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Home</button>
@@ -42,7 +42,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
           ] }
         ].map((section, index) => (
           <section key={index} id={section.id} className="w-full max-w-4xl p-8 mb-16 bg-black bg-opacity-20 rounded-lg shadow-xl transition transform hover:scale-105 hover:shadow-2xl duration-300 text-center">
-            <h2 className="text-3xl font-bold text-tomato mb-6 transition-transform transform hover:scale-110 hover:text-tomato/90 duration-300">{section.title}</h2>
+            <h2 className="text-3xl font-bold text-tomato mb-6">{section.title}</h2>
             {section.fields.map((item, idx) => (
               <div key={idx} className="flex flex-col items-center space-y-8 bg-black bg-opacity-10 p-6 rounded-lg shadow-lg hover:bg-opacity-20 transition transform hover:scale-105 hover:shadow-xl duration-300 mb-10">
                 <h3 className="text-xl text-tomato font-semibold">{item.title}</h3>

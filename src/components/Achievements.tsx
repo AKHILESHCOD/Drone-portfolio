@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Trophy, Star, Award, Heart, Medal, Menu, Cpu } from "lucide-react";
+import { Trophy, Star, Award, Heart, Medal, Menu, Cpu, X } from "lucide-react";
 import { useState } from "react";
 
 const achievements = [
@@ -10,91 +10,114 @@ const achievements = [
   { image: "/placeholder5.jpg", title: "Academic Recognition", desc: "Honored with multiple awards for innovation and research excellence during our academic journey." }
 ];
 
-export default function Achievements() {
-  const [isOpen, setIsOpen] = useState(false);
+interface AchievementsProps {
+  onNavigate?: (path: string) => void;
+}
+
+export default function Achievements({ onNavigate }: AchievementsProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavigation = (path: string) => {
+    if (onNavigate) {
+      setIsMenuOpen(false);
+      onNavigate(path);
+    }
+  };
+
+  const NavButton = ({ path, text }: { path: string; text: string }) => (
+    <button
+      onClick={() => handleNavigation(path)}
+      className="px-6 py-2 rounded-lg relative group overflow-hidden interactive-hover"
+    >
+      <span className="relative z-10 text-gray-400 group-hover:text-white transition-colors duration-300">{text}</span>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] opacity-0 group-hover:opacity-10 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 origin-left"></div>
+    </button>
+  );
 
   return (
     <section 
-      className="relative min-h-screen p-16 flex flex-col justify-center"
+      className="relative min-h-screen p-16 flex flex-col justify-center bg-black"
       style={{ backgroundImage: "url('https://www.aeromotus.com/wp-content/uploads/2021/03/4-Rain-testing-IPX1-of-the-M300-RTK.gif')", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
     >
-      {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full flex justify-between items-center bg-black/70 backdrop-blur-xl p-6 shadow-xl border-b border-gray-800 hover:shadow-2xl transition-all">
-        <div className="flex items-center space-x-4">
-          <Cpu className="h-12 w-12 text-tomato" />
-          <h1 className="text-2xl font-bold text-tomato">SkyTrinethra</h1>
-        </div>
-        <div className="hidden md:flex space-x-4">
-          {[
-            { name: "Home", path: "/" },
-            { name: "About", path: "/#about" },
-            { name: "Services", path: "/services" },
-            { name: "Contact", path: "/#contact" }
-          ].map((item) => (
-            <motion.div 
-              key={item.name} 
-              className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl"
-              whileHover={{ scale: 1.1, boxShadow: "0px 10px 30px rgba(255, 99, 71, 0.5)" }}
+      <nav className="fixed top-0 left-0 w-full z-50 nav-blur border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div 
+              className="flex items-center space-x-3 group hover:scale-105 transition-all duration-300 cursor-pointer"
+              onClick={() => handleNavigation('/')}
             >
-              <a href={item.path} className="text-tomato text-sm">{item.name}</a>
-            </motion.div>
-          ))}
+              <Cpu className="w-10 h-10 primary-text group-hover:rotate-180 transition-all duration-500 animate-float" />
+              <span className="text-2xl font-bold primary-text neon-text">
+                ＳＫＹＴＨＲＩＮΞＴＨＲΛ
+              </span>
+            </div>
+
+            <div className="hidden md:flex space-x-2">
+              <NavButton path="/" text="Home" />
+              <NavButton path="/#about" text="About Us" />
+              <NavButton path="/services" text="Services" />
+              <NavButton path="/#vision" text="Vision" />
+              <button 
+                onClick={() => handleNavigation('/#contact')}
+                className="px-6 py-2 rounded-lg primary-bg hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border"
+              >
+                Contact Us
+              </button>
+            </div>
+
+            <button
+              className="md:hidden primary-text transform transition-all duration-300 hover:scale-110"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+
+          <div className={`md:hidden transition-all duration-300 ${
+            isMenuOpen ? 'max-h-screen py-4' : 'max-h-0 overflow-hidden'
+          }`}>
+            <div className="flex flex-col space-y-4">
+              <NavButton path="/" text="Home" />
+              <NavButton path="/#about" text="About Us" />
+              <NavButton path="/services" text="Services" />
+              <NavButton path="/#vision" text="Vision" />
+              <button 
+                onClick={() => handleNavigation('/#contact')}
+                className="px-6 py-2 rounded-lg primary-bg text-center hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border"
+              >
+                Contact Us
+              </button>
+            </div>
+          </div>
         </div>
-        <motion.button 
-          className="md:hidden text-tomato" 
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.2, rotate: 90 }}
-        >
-          <Menu size={28} />
-        </motion.button>
       </nav>
       
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black/80 backdrop-blur-xl p-6 flex flex-col space-y-4 shadow-2xl md:hidden">
-          {[
-            { name: "Home", path: "/" },
-            { name: "About", path: "/#about" },
-            { name: "Services", path: "/services" },
-            { name: "Contact", path: "/#contact" }
-          ].map((item) => (
-            <motion.a 
-              key={item.name} 
-              href={item.path}
-              className="text-tomato hover:text-tomato/80 transition"
-              whileHover={{ scale: 1.1 }}
-            >
-              {item.name}
-            </motion.a>
-          ))}
-        </div>
-      )}
-      
-      <div className="mt-20 mb-16 flex justify-center">
+      <div className="mt-32 mb-16 flex justify-center">
         <motion.div 
-          className="bg-black/50 px-8 py-4 rounded-xl shadow-2xl border border-gray-700 transition-all" 
-          whileHover={{ scale: 1.1, boxShadow: "0px 15px 40px rgba(255, 99, 71, 0.5)" }}>
-          <h2 className="text-2xl font-bold text-tomato text-center uppercase tracking-wide">🏆 Our Achievements</h2>
+          className="glass-container px-8 py-4 rounded-xl hover-glow transform hover:scale-[1.02] transition-all duration-500" 
+          whileHover={{ scale: 1.1, boxShadow: "0px 15px 40px rgba(96, 165, 250, 0.2)" }}>
+          <h2 className="text-3xl font-bold primary-text neon-text text-center">Our Achievements</h2>
         </motion.div>
       </div>
+
       <div className="flex flex-col space-y-20 w-full max-w-7xl mx-auto">
         {achievements.map((ach, index) => (
           <motion.div
             key={index}
-            className="flex flex-col bg-black/60 text-tomato/90 p-16 rounded-3xl shadow-3xl border border-gray-800 transition-transform w-full items-center justify-center text-center space-y-10"
-            whileHover={{ scale: 1.1, boxShadow: "0px 15px 40px rgba(255, 99, 71, 0.6)" }}
+            className="glass-container p-16 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 w-full items-center justify-center text-center space-y-10"
+            whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
-            <h3 className="text-3xl font-semibold text-tomato mb-6">{ach.title}</h3>
+            <h3 className="text-3xl font-semibold primary-text neon-text mb-6">{ach.title}</h3>
             <div className="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
-              <div className="w-32 h-32 bg-tomato/20 rounded-lg shadow-xl border border-gray-700 flex items-center justify-center">
-                {index === 0 && <Trophy className="w-16 h-16 text-tomato" />}
-                {index === 1 && <Star className="w-16 h-16 text-tomato" />}
-                {index === 2 && <Award className="w-16 h-16 text-tomato" />}
-                {index === 3 && <Heart className="w-16 h-16 text-tomato" />}
-                {index === 4 && <Medal className="w-16 h-16 text-tomato" />}
+              <div className="w-32 h-32 glass-container rounded-lg flex items-center justify-center animate-float">
+                {index === 0 && <Trophy className="w-16 h-16 primary-text" />}
+                {index === 1 && <Star className="w-16 h-16 primary-text" />}
+                {index === 2 && <Award className="w-16 h-16 primary-text" />}
+                {index === 3 && <Heart className="w-16 h-16 primary-text" />}
+                {index === 4 && <Medal className="w-16 h-16 primary-text" />}
               </div>
-              <p className="text-lg text-tomato/90 leading-relaxed max-w-2xl">{ach.desc}</p>
+              <p className="text-lg text-gray-300 leading-relaxed max-w-2xl shimmer">{ach.desc}</p>
             </div>
           </motion.div>
         ))}
