@@ -27,7 +27,7 @@ export default function Achievements({ onNavigate }: AchievementsProps) {
       style={{ backgroundImage: "url('https://www.aeromotus.com/wp-content/uploads/2021/03/4-Rain-testing-IPX1-of-the-M300-RTK.gif')", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
     >
       {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full flex justify-between items-center bg-black/70 backdrop-blur-xl p-6 shadow-xl border-b border-gray-800 hover:shadow-2xl transition-all">
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center bg-black/70 backdrop-blur-lg p-3.5 shadow-xl border-b border-gray-800 hover:shadow-2xl transition-all">
         <div className="flex items-center space-x-4">
           <Cpu className="h-12 w-12 text-tomato" />
           <h1 className="text-2xl font-bold text-tomato">ＳＫＹＴＨＲＩＮΞＴＨＲΛ</h1>

@@ -20,12 +20,12 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
             <h1 className="text-2xl font-bold">ＳＫＹＴＨＲＩＮΞＴＨＲΛ</h1>
           </div>
           <div className="flex space-x-6 mt-3">
-            <button onClick={() => onNavigate('/')} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Home</button>
-            <a href="#drone" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Drone Services</a>
-            <a href="#software" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Software Services</a>
-            <a href="#training" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Training</a>
-            <button onClick={() => onNavigate('/achievements')} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Achievements</button>
-            <button onClick={handleContact} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Send Message</button>
+            <button onClick={() => onNavigate('/')} className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Home</button>
+            <a href="#drone" className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Drone Services</a>
+            <a href="#software" className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Software Services</a>
+            <a href="#training" className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Training</a>
+            <button onClick={() => onNavigate('/achievements')} className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Achievements</button>
+            <button onClick={handleContact} className="px-4 py-1 bg-gray-800/70 text-tomato rounded-md shadow-lg border border-gray-700 transition-all hover:bg-gray-700/50 hover:shadow-xl cursor-pointer">Send Message</button>
           </div>
         </nav>
       </header>
