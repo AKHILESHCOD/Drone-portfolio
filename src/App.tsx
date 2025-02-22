@@ -100,7 +100,7 @@ function App() {
   return (
     <div className="min-h-screen text-white">
       {/* Navbar */}
-      <nav className="fixed w-full z-50 bg-gray-900/90 border-b border-white/10 backdrop-blur-lg">
+      <nav className="fixed w-full z-50 bg-black/40 border-b border-white/10 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 group hover:scale-105 transition-all duration-300">
