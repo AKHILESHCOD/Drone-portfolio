@@ -76,7 +76,7 @@
 }
 
 .glass-container {
-  @apply bg-black/40 backdrop-blur-sm border border-white/10;
+  @apply bg-black/20 backdrop-blur-sm border border-white/5;
   position: relative;
   overflow: hidden;
 }
@@ -157,7 +157,7 @@
 }
 
 .nav-blur {
-  @apply bg-black/30 backdrop-blur-md;
+  @apply bg-black/20 backdrop-blur-[2px];
   border-bottom: 1px solid rgba(255, 99, 71, 0.1);
 }
 

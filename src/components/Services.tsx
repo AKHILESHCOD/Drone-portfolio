@@ -6,11 +6,15 @@ interface ServicesPageProps {
 }
 
 export default function ServicesPage({ onNavigate }: ServicesPageProps) {
+  const handleContact = () => {
+    window.open("https://forms.gle/YOUR_GOOGLE_FORM_LINK", "_blank");
+  };
+
   return (
     <div className="relative min-h-screen bg-black bg-opacity-20 bg-fixed bg-center bg-cover text-tomato" style={{ backgroundImage: 'url(https://s.yimg.com/ny/api/res/1.2/RzLsVHl0R5_mHfGFOstm3A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTU0MA--/https://media.zenfs.com/en/digital_camera_world_590/40479b1ffeadd3490d158ee2e9f4d656)' }}>
       {/* Navbar */}
       <header>
-        <nav className="fixed top-0 left-0 w-full flex justify-between items-center p-5 bg-black bg-opacity-30 text-tomato shadow-lg backdrop-blur-md z-20">
+        <nav className="fixed top-0 left-0 w-full flex justify-between items-center p-5 bg-black/70 backdrop-blur-xl text-tomato shadow-lg z-20">
           <div className="flex items-center space-x-4 cursor-pointer" onClick={() => onNavigate('/')}>
             <Cpu className="h-10 w-10" />
             <h1 className="text-2xl font-bold">ＳＫＹＴＨＲＩＮΞＴＨＲΛ</h1>
@@ -20,6 +24,8 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
             <a href="#drone" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Drone Services</a>
             <a href="#software" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Software Services</a>
             <a href="#training" className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Training</a>
+            <button onClick={() => onNavigate('/achievements')} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Achievements</button>
+            <button onClick={handleContact} className="px-5 py-2 bg-transparent border border-tomato text-tomato rounded-lg shadow-md hover:bg-tomato hover:text-white transition duration-300">Send Message</button>
           </div>
         </nav>
       </header>

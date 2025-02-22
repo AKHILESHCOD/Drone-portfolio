@@ -4,9 +4,6 @@ import ServicesPage from './components/Services';
 import Achievements from './components/Achievements';
 
 function App() {
-
-
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [showServices, setShowServices] = useState(false);
@@ -16,8 +13,8 @@ function App() {
     email: '',
     message: ''
   });
-const handleContact = () => {
-    // Replace this URL with your actual Google Form URL
+
+  const handleContact = () => {
     window.open("https://forms.gle/YOUR_GOOGLE_FORM_LINK", "_blank");
   };
 
@@ -29,9 +26,20 @@ const handleContact = () => {
     }));
   };
 
-  const handleEmailClick = (e: React.MouseEvent) => {
-    //window.open("mailto:akhileshkaranam2020@gmail.com", "_self");
-    alert("Button clicked!");
+  const handleNavigate = (path: string) => {
+    if (path === '/services') {
+      setShowServices(true);
+      setShowAchievements(false);
+    } else if (path === '/achievements') {
+      setShowAchievements(true);
+      setShowServices(false);
+    } else {
+      setShowServices(false);
+      setShowAchievements(false);
+      if (path.startsWith('/#')) {
+        scrollToSection(path.substring(2));
+      }
+    }
   };
 
   useEffect(() => {
@@ -75,6 +83,20 @@ const handleContact = () => {
     </button>
   );
 
+  // If showing Services or Achievements, render those components
+  if (showServices) {
+    return <ServicesPage onNavigate={handleNavigate} />;
+  }
+
+  if (showAchievements) {
+    return <Achievements onNavigate={handleNavigate} />;
+  }
+
+  const handleSocialClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.open('https://www.youtube.com', '_blank');
+  };
+
   return (
     <div className="min-h-screen text-white">
       {/* Navbar */}
@@ -83,7 +105,7 @@ const handleContact = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 group hover:scale-105 transition-all duration-300">
               <Cpu className="w-10 h-10 primary-text group-hover:rotate-180 transition-all duration-500 animate-float" />
-              <span className="text-2xl font-bold primary-text neon-text">
+              <span className="text-2xl font-bold primary-text">
                 ＳＫＹＴＨＲＩＮΞＴＨＲΛ
               </span>
             </div>
@@ -125,7 +147,7 @@ const handleContact = () => {
       <section id="home" className="min-h-screen flex flex-col justify-center px-6">
         <div className="max-w-4xl mx-auto text-center mt-32">
           <div className="glass-container p-12 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 animate-glow interactive-hover">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 primary-text neon-text leading-tight animate-float">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 primary-text leading-tight animate-float">
               Revolutionizing Aerial & Digital Solutions
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed shimmer">
@@ -144,11 +166,11 @@ const handleContact = () => {
       {/* About Us Section */}
       <section id="about" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-16 primary-text neon-text text-center animate-float">
+          <h2 className="text-4xl font-bold mb-16 primary-text text-center animate-float">
             About Us
           </h2>
           <div className="glass-container p-8 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 interactive-hover">
-            <h3 className="text-3xl font-bold mb-4 primary-text neon-text">John Smith</h3>
+            <h3 className="text-3xl font-bold mb-4 primary-text">John Smith</h3>
             <p className="text-xl font-semibold mb-4 text-gray-300 shimmer">CEO & Founder</p>
             <p className="text-gray-300 mb-8 leading-relaxed">
               With over 15 years of experience in drone technology and software development,
@@ -185,7 +207,7 @@ const handleContact = () => {
       <section id="vision" className="py-20 px-6">
         <div className="max-w-7xl mx-auto text-center glass-container p-12 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 interactive-hover">
           <Rocket className="w-16 h-16 mx-auto mb-8 primary-text animate-float" />
-          <h2 className="text-4xl font-bold mb-8 primary-text neon-text">
+          <h2 className="text-4xl font-bold mb-8 primary-text">
             Our Vision
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed shimmer">
@@ -198,49 +220,96 @@ const handleContact = () => {
 
       {/* Contact Us Section */}
       <section id="contact" className="py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="glass-container p-8 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 interactive-hover flex items-center justify-center" style={{ height: 'auto' }}>
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-8 text-[#FF6347]">
-              Contact Us
-            </h2>
-            <div className="space-y-6 mb-8">
-              {/* Company Details */}
-              <div className="text-center space-y-4">
-                <p className="text-xl font-semibold text-white">Company Name: SkyTrinethra</p>
-                <p className="text-xl font-semibold text-white">Email: info@skythrinethra.com</p>
-                <p className="text-xl font-semibold text-white">Phone: (123) 456-7890</p>
-                <p className="text-xl font-semibold text-white">Address: 123 Innovation St., Tech City</p>
-              </div>
-              
-              {/* Gap between company details and button */}
-              <div className="mt-8">
-                {/* Send Message Button */}
-                <button
-                  type="button"
-                  onClick={handleContact}
-                  className="px-8 py-4 rounded-lg primary-bg hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg font-semibold hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover z-20"
-                >
-                  Send Message
-                </button>
+        <div className="max-w-7xl mx-auto">
+          <div className="glass-container p-8 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 interactive-hover flex items-center justify-center" style={{ height: 'auto' }}>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold mb-8 text-[#FF6347]">
+                Contact Us
+              </h2>
+              <div className="space-y-6 mb-8">
+                {/* Company Details */}
+                <div className="text-center space-y-4">
+                  <p className="text-xl font-semibold text-white">Company Name: SkyTrinethra</p>
+                  <p className="text-xl font-semibold text-white">Email: info@skythrinethra.com</p>
+                  <p className="text-xl font-semibold text-white">Phone: (123) 456-7890</p>
+                  <p className="text-xl font-semibold text-white">Address: 123 Innovation St., Tech City</p>
+                </div>
+                
+                {/* Gap between company details and button */}
+                <div className="mt-8">
+                  {/* Send Message Button */}
+                  <button
+                    type="button"
+                    onClick={handleContact}
+                    className="px-8 py-4 rounded-lg primary-bg hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg font-semibold hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover z-20"
+                  >
+                    Send Message
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
- 
+      </section>
+
       {/* Footer Section */}
-      <footer className="py-10 px-6 bg-gray-800 text-white">
+      <footer className="py-10 px-6 nav-blur border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
           <div className="glass-container p-8 rounded-2xl hover-glow transform hover:scale-[1.02] transition-all duration-500 interactive-hover">
-            <p>&copy; 2025 SkyTrinethra, All Rights Reserved.</p>
-            <p>Follow Us:</p>
+            <p className="text-gray-300">&copy; 2025 SkyTrinethra, All Rights Reserved.</p>
+            <p className="text-gray-300 mt-2">Follow Us:</p>
             
             <div className="flex justify-center space-x-6 mt-4">
-              <a href="#" className="text-gray-300 hover:text-white">Facebook</a>
-              <a href="#" className="text-gray-300 hover:text-white">Twitter</a>
-              <a href="#" className="text-gray-300 hover:text-white">LinkedIn</a>
+            <button
+                  type="button"
+                  onClick={() => window.open('https://www.youtube.com', '_blank')}
+                  className="w-12 h-12 hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover flex items-center justify-center z-20">
+                  <img 
+                  src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" 
+                  alt="Linkedin" 
+                  className="w-8 h-8"
+                 />
+                 </button>              
+                 <button
+                  type="button"
+                  onClick={() => window.open('https://www.youtube.com', '_blank')}
+                  className="w-12 h-12 hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover flex items-center justify-center z-20">
+                  <img 
+                  src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" 
+                  alt="Twitter" 
+                  className="w-8 h-8"
+                 />
+                 </button>             
+                  <button
+                  type="button"
+                  onClick={() => window.open('https://www.youtube.com', '_blank')}
+                  className="w-12 h-12 hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover flex items-center justify-center z-20">
+                  <img 
+                  src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" 
+                  alt="Instagram" 
+                  className="w-8 h-8"
+                 />
+                 </button>
+                 <button
+                  type="button"
+                  onClick={() => window.open('https://www.youtube.com', '_blank')}
+                  className="w-12 h-12 hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover flex items-center justify-center z-20">
+                  <img 
+                  src="https://cdn-icons-png.flaticon.com/128/733/733547.png" 
+                  alt="Facebook" 
+                  className="w-8 h-8"
+                 />
+                 </button>  
+                 <button
+                  type="button"
+                  onClick={() => window.open('https://www.youtube.com', '_blank')}
+                  className="w-12 h-12 hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#60A5FA]/20 animate-pulse-border interactive-hover flex items-center justify-center z-20">
+                  <img 
+                  src="https://cdn-icons-png.flaticon.com/128/174/174883.png" 
+                  alt="Youtube" 
+                  className="w-8 h-8"
+                 />
+                 </button>               
             </div>
           </div>
         </div>
